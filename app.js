@@ -15,10 +15,12 @@ app.use(morgan('tiny'));
 
 // routes
 const productsRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/categories');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/products`, productsRoutes);
+app.use(`${api}/categories`, categoryRoutes);
 
 
 // connection
