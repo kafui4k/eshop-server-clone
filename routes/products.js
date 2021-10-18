@@ -1,5 +1,5 @@
 const express = require('express');
-const { Category } = require('../models/category');
+const {Category} = require('../models/category');
 const router = express.Router();
 const {Product} = require('../models/product');
 const mongoose = require('mongoose');
@@ -57,7 +57,7 @@ router.put('/:id', async (req, res) => {
     if(mongoose.isValidObjectId(req.params.id)) {
         res.status(400).send('Invalid Product Id');
     }
-    
+
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send('Inalid Category');
 
@@ -109,6 +109,19 @@ router.delete('/:id', (req, res) => {
                 error: err
             })
         })
+})
+
+router.get('/get/count', async (req, res) => {
+    const productCount = await Product.countDocuments()
+    
+    if (!productCount) {
+        res.status(500).json({
+            success: false
+        })
+    }
+    res.status(200).send({
+        productCount: productCount
+    });
 })
 
 module.exports = router;
