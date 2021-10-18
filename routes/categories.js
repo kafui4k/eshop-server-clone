@@ -2,7 +2,7 @@ const { Category } = require('../models/category');
 const express = require('express');
 const router = express.Router();
 
-router.get(`/`, async (req, res) => {
+router.get('/', async (req, res) => {
     const categoryList = await Category.find();
 
     if (!categoryList) {
@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
     res.status(200).send(category);
 })
 
-router.post(`/`, async(req, res) => {
+router.post('/', async(req, res) => {
     let category = new Category({
         name: req.body.name,
         icon: req.body.icon,
@@ -39,7 +39,7 @@ router.post(`/`, async(req, res) => {
         return res.status(404).send('the category cannpt be created');
     }
 
-    res.send(category);
+    res.status(200).send(category);
 })
 
 router.put('/:id', async (req, res) => {
@@ -59,7 +59,7 @@ router.put('/:id', async (req, res) => {
         return res.status(400).send('cateogry cannot be updated')
     }
 
-    res.send(category);
+    res.status(200).send(category);
 })
 
 // api/v1/categories/1

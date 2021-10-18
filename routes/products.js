@@ -3,7 +3,7 @@ const { Category } = require('../models/category');
 const router = express.Router();
 const {Product} = require('../models/product');
 
-router.get(`/`, async (req, res) => {
+router.get('/', async (req, res) => {
     const productsList = await Product.find().select('name image -_id');
 
     if (!productsList) {
@@ -11,10 +11,10 @@ router.get(`/`, async (req, res) => {
             success:false
         })
     }
-    res.send(productsList);
+    res.status(200).send(productsList);
 })
 
-router.get(`/:id`, async (req, res) => {
+router.get('/:id', async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -22,10 +22,10 @@ router.get(`/:id`, async (req, res) => {
             success:false
         })
     }
-    res.send(product);
+    res.status(200).send(product);
 })
 
-router.post(`/`, async (req, res) => {
+router.post('/', async (req, res) => {
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send('Inalid Category');
     
@@ -49,7 +49,7 @@ router.post(`/`, async (req, res) => {
         return res.status(500).send('Product cannot be Created')
     }
 
-    res.send(product);
+    res.status(200).send(product);
 })
 
 module.exports = router;
