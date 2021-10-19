@@ -16,14 +16,16 @@ app.use(morgan('tiny'));
 // routes
 const productsRoutes = require('./routes/products');
 const categoryRoutes = require('./routes/categories');
+const userRoutes = require('./routes/users');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/categories`, categoryRoutes);
+app.use(`${api}/users`, userRoutes);
 
 
-// connection
+// Databse connection
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
         console.log('Database connection ready...');
