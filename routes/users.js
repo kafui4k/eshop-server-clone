@@ -61,16 +61,16 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign(
             {
                 userId: user.id,
-
+                isAdmin: user.isAdmin
             }, 
             secret,
             {
                 expiresIn: '1d'
             }
         )
-        res.status(200).send({user: user.email, token: token});
+        return res.status(200).send({user: user.email, token: token});
     } else {
-        res.status(400).send('Password is incorrect');
+        return res.status(400).send('Password is incorrect');
     }
     // return res.status(200).send(user);
 })
