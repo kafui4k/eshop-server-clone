@@ -21,12 +21,14 @@ app.use(errorHandler);
 const productsRoutes = require('./routes/products');
 const categoryRoutes = require('./routes/categories');
 const userRoutes = require('./routes/users');
+const orderRoutes = require('./routes/orders');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/categories`, categoryRoutes);
 app.use(`${api}/users`, userRoutes);
+app.use(`${api}/orders`, orderRoutes);
 
 
 // Databse connection
